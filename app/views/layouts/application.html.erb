@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://kit.fontawesome.com/a8e37e4af8.js" crossorigin="anonymous"></script>
     <title>Bookers2-debug</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,12 +14,12 @@
 
     <%= render 'layouts/header' %>
 
-    <div class="container">
-      <p id="notice"><%= notice %></p>
 
-    </div>
+    <p id="notice"><%= notice %></p>
+
 
     <%= render 'layouts/footer' %>
-    <%= yield %>
+
   </body>
+  <%= yield %>
 </html>

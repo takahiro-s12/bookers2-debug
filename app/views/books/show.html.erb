@@ -1,5 +1,5 @@
-
-<div class="row">
+<div class="container px-5 px-sm-0">
+  <div class="row">
 	<div class="col-xs-3">
 
 		<h2>User info</h2>
@@ -23,11 +23,13 @@
 					</td>
 					<td><%= link_to @book.title, book_path(@book) %></td>
 					<td><%= @book.body %></td>
-					<td><%= link_to "Edit", edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
-					<td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
+					<% if current_user.id == @user.id %>
+					  <td><%= link_to "Edit", edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
+					  <td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger destroy_book_#{@book.id}" %></td>
+					<% end %>
 				</tr>
 			</table>
 
 	</div>
 </div>
-
+</div>
