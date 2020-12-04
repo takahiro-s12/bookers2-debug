@@ -26,7 +26,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def following_user
+    @user = User.find(params[:id])
+    @users = @user.following_user.all
+  end
+  
+  def follower_user
+    @user = User.find(params[:id])
+    @users = @user.follower_user.all
+  end
+
+
+
   private
+
   def user_params
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
@@ -37,7 +50,6 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
-  
-  def follow
-    
+
+
 end
