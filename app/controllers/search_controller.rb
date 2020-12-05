@@ -1,55 +1,14 @@
 class SearchController < ApplicationController
   def search
-    @model = params["search"]["model"]
-    @content = params["search"]["content"]
-    @how = params["search"]["how"]
-    @date = search_for(@how, @model, @content)
-  end
+    @model = params[:model]
+    content = params[:content]
+    how = params[:how]
+  
 
-  private
-
-  def match(model,content)
-    if model == 'user'
-      User.where(name:content)
-    elsif model == 'book'
-      Book.where(title:content)
-    end
-  end
-
-  def forward(model,content)
-    if model == 'user'
-      User.where("name LIKE?", "#{content}%")
-    elsif model == 'book'
-      Book.where("title LIKE?", "#{content}%")
-    end
-  end
-
-  def backward(model,content)
-    if model == 'user'
-      User.where("name LIKE?", "%#{content}")
-    elsif model == 'book'
-      Book.where("model LIKE?", "%#{content}")
-    end
-  end
-
-  def partical(model,content)
-    if model == 'user'
-      User.where('name LIKE?', "%#{content}%")
-    elsif model == 'book'
-      Book.where('title LIKE?', "%#{content}%")
-    end
-  end
-
-  def search_for(how, model, content)
-    case how
-    when 'match'
-      match(model, content)
-    when 'forward'
-      foward(model, content)
-    when 'backward'
-      backward(model, content)
-    when 'partical'
-      partical(model, content)
+    if @model == "user"
+      @user = User.search(how,content)
+    else
+      @book = Book.search(how,content)
     end
   end
 end

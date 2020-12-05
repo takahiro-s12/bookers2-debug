@@ -29,4 +29,18 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
   attachment :profile_image, destroy: false
+
+  def self.search(how,content)
+    if how == "forward"
+      @user = User.where("name LIKE?","#{content}%")
+    elsif how == "backward"
+      @user = User.where("name LIKE?","%#{content}")
+    elsif how == "match"
+      @user = User.where(name: content)
+    elsif how == "partial"
+      @user = User.where("name LIKE?","%#{content}%")
+    else
+      @user = User.all
+    end
+  end
 end
