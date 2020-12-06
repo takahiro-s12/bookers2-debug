@@ -22,21 +22,13 @@
 					</td>
 					<td><%= link_to @book.title, book_path(@book) %></td>
 					<td><%= @book.body %></td>
+					<!---いいね機能-->
 					<td>
-					  <% if @book.favorited_by?(current_user) %>
-					    <p>
-					    	<%= link_to book_favorites_path(@book), method: :delete do %>
-					  	    ♥<%= @book.favorites.count %>
-					    	<% end %>
-					    </p>
-					    <% else %>
-					    <p>
-					    	<%= link_to book_favorites_path(@book), method: :post do %>
-					    	  ♡<%= @book.favorites.count %>
-					    	<% end %>
-					    </p>
-				  	  <% end %>
-				    </td>
+						<div class="favorite_button">
+							<%= render partial: 'favorites/favorite', locals: { book: @book} %>
+						</div>
+					</td>
+					<!---いいね機能-->
 				    <td><p>コメント数：<%= @book.book_comments.count %></p><td>
 					<% if current_user.id == @user.id %>
 					  <td><%= link_to "Edit", edit_book_path(@book), class: "btn-sm btn-success edit_book_#{@book.id}" %></td>
